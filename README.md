@@ -1,56 +1,131 @@
-# {{crew_name}} Crew
+# ⚖️ AI Courtroom Simulator
 
-Welcome to the {{crew_name}} Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+A **multi-agent, AI-powered virtual courtroom system** built using **CrewAI** that simulates real-world legal trials through autonomous agents representing courtroom roles such as **Prosecution, Defense, Judge, Jury, Witnesses, Case Loader, and Reporter**.
 
-## Installation
+This project demonstrates advanced **agent orchestration, legal reasoning, argument generation, and decision-making**, fulfilling academic requirements for **context sharing, tool integration, structured output, monitoring, and agent-to-agent collaboration**.
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+---
 
-First, if you haven't already, install uv:
+## 🎯 Project Objectives
+
+* Simulate realistic courtroom proceedings using AI agents
+* Enable dynamic legal argument generation (10+ interactions)
+* Demonstrate multi-agent communication and orchestration
+* Apply Retrieval-Augmented Generation (RAG) for case understanding
+* Generate structured verdicts and trial summaries
+
+---
+
+## 🧠 System Architecture
+
+Each courtroom role is implemented as an independent **CrewAI Crew**, consisting of agents, tasks, and tools.
+
+### 🧩 Crews Overview
+
+| Crew            | Responsibility                       |
+| --------------- | ------------------------------------ |
+| CaseLoaderCrew  | Loads and parses legal case datasets |
+| ProsecutionCrew | Generates prosecution arguments      |
+| DefenseCrew     | Generates defense counterarguments   |
+| WitnessCrew     | Produces witness testimonies         |
+| JuryCrew        | Evaluates arguments impartially      |
+| JudgeCrew       | Issues final verdict                 |
+| ReporterCrew    | Generates full trial report          |
+
+---
+
+## 📁 Project Structure
 
 ```bash
-pip install uv
+src/
+ └── courtroom/
+      ├── crews/
+      │     ├── case_loader_crew/
+      │     ├── prosecution_crew/
+      │     ├── defense_crew/
+      │     ├── witness_crew/
+      │     ├── jury_crew/
+      │     ├── judge_crew/
+      │     └── reporter_crew/
+      ├── tools/
+      │     ├── file_parser_tool.py
+      │     ├── evidence_analyzer_tool.py
+      │     └── a2a_protocol.py
+      │     └──legal_search_tool.py
+      ├── data/
+      │     └── legal_cases.json
+      └── main.py
 ```
 
-Next, navigate to your project directory and install the dependencies:
+---
 
-(Optional) Lock the dependencies and install them by using the CLI command:
+## 🛠️ Technologies Used
+
+* **Python 3.10+**
+* **CrewAI** (Multi-Agent Framework)
+* **LLMs**: Gemini / Groq / OpenAI
+* **Pydantic** (Structured Output)
+* **YAML** (Agent & Task Configuration)
+* **RAG (Retrieval-Augmented Generation)**
+
+---
+
+## 🔁 Trial Execution Flow
+
+1. Load legal case data
+2. Prosecution presents arguments
+3. Defense generates counterarguments
+4. Witnesses provide testimony
+5. Jury evaluates both sides
+6. Judge delivers verdict
+7. Reporter generates trial summary
+
+Each step passes context using **shared state** across agents.
+
+---
+
+## 📊 Minimum Project Criteria Mapping
+
+| Requirement                  | Status                       |
+| ---------------------------- | ---------------------------- |
+| Context Sharing              | ✅ Implemented via Flow state |
+| Tool Integration (MCP)       | ✅ Custom tools used          |
+| Structured Output            | ✅ Pydantic models            |
+| Logging & Monitoring         | ✅ Callback logging           |
+| Agent-to-Agent Communication | ✅ CrewAI interoperability    |
+| Framework Usage              | ✅ CrewAI                     |
+
+---
+
+## 🚀 Installation
+
 ```bash
-crewai install
+pip install -r requirements.txt
 ```
 
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/courtroom/config/agents.yaml` to define your agents
-- Modify `src/courtroom/config/tasks.yaml` to define your tasks
-- Modify `src/courtroom/crew.py` to add your own logic, tools and specific args
-- Modify `src/courtroom/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your flow and begin execution, run this from the root folder of your project:
+Set environment variables:
 
 ```bash
-crewai run
+export GROQ_API_KEY=your_key
+export GEMINI_API_KEY=your_key
 ```
 
-This command initializes the courtroom Flow as defined in your configuration.
+---
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+## ▶️ Run the Simulation
 
-## Understanding Your Crew
+```bash
+python src/courtroom/main.py
+```
 
-The courtroom Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+---
 
-## Support
+## 📄 Sample Output
 
-For support, questions, or feedback regarding the {{crew_name}} Crew or crewAI.
+* Judge Verdict (JSON)
+* Trial Transcript (Markdown)
+* Lawyer Argument Logs
 
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+---
 
-Let's create wonders together with the power and simplicity of crewAI.
+
